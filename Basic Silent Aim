@@ -1,0 +1,160 @@
+local ScreenGui = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local MainLabel = Instance.new("TextLabel")
+local Arsenal = Instance.new("TextLabel")
+local Main_2 = Instance.new("TextButton")
+local Other = Instance.new("TextButton")
+local Border = Instance.new("Frame")
+local toggle = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Main.Name = "Main"
+Main.Parent = ScreenGui
+Main.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
+Main.BackgroundTransparency = 0.100
+Main.Position = UDim2.new(0.657414198, 0, 0.632880092, 0)
+Main.Size = UDim2.new(0, 340, 0, 224)
+Main.Active = true
+Main.Draggable = true
+
+UICorner.Parent = Main
+
+MainLabel.Name = "Main Label"
+MainLabel.Parent = Main
+MainLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MainLabel.BackgroundTransparency = 1.000
+MainLabel.Position = UDim2.new(0.0281690136, 0, 0.0343137272, 0)
+MainLabel.Size = UDim2.new(0, 86, 0, 28)
+MainLabel.Font = Enum.Font.SourceSans
+MainLabel.Text = "Basic Aim"
+MainLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+MainLabel.TextSize = 27.000
+MainLabel.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+
+Arsenal.Name = "Arsenal"
+Arsenal.Parent = Main
+Arsenal.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Arsenal.BackgroundTransparency = 1.000
+Arsenal.Position = UDim2.new(0.658450723, 0, 0.0343137272, 0)
+Arsenal.Size = UDim2.new(0, 86, 0, 28)
+Arsenal.Font = Enum.Font.SourceSans
+Arsenal.Text = "Arsenal"
+Arsenal.TextColor3 = Color3.fromRGB(255, 255, 255)
+Arsenal.TextSize = 27.000
+Arsenal.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+
+Main_2.Name = "Main"
+Main_2.Parent = Main
+Main_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Main_2.BackgroundTransparency = 1.000
+Main_2.Position = UDim2.new(0.0264705885, 0, 0.15625, 0)
+Main_2.Size = UDim2.new(0, 95, 0, 23)
+Main_2.Font = Enum.Font.SourceSans
+Main_2.Text = "Main"
+Main_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+Main_2.TextSize = 31.000
+
+Other.Name = "Other"
+Other.Parent = Main
+Other.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Other.BackgroundTransparency = 1.000
+Other.Position = UDim2.new(0.655882359, 0, 0.15625, 0)
+Other.Size = UDim2.new(0, 95, 0, 23)
+Other.Visible = false
+Other.Font = Enum.Font.SourceSans
+Other.Text = "Misc"
+Other.TextColor3 = Color3.fromRGB(0, 0, 0)
+Other.TextSize = 31.000
+
+Border.Name = "Border"
+Border.Parent = Main
+Border.BackgroundColor3 = Color3.fromRGB(83, 83, 83)
+Border.Position = UDim2.new(0.0264705885, 0, 0.276785702, 0)
+Border.Size = UDim2.new(0, 325, 0, 3)
+
+toggle.Name = "toggle"
+toggle.Parent = Main
+toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+toggle.BackgroundTransparency = 0.900
+toggle.Position = UDim2.new(0.0264705885, 0, 0.34375, 0)
+toggle.Size = UDim2.new(0, 86, 0, 50)
+toggle.Font = Enum.Font.SourceSans
+toggle.Text = "Silent Aim"
+toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggle.TextSize = 25.000
+
+TextLabel.Parent = Main
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(0.676470578, 0, 0.6875, 0)
+TextLabel.Size = UDim2.new(0, 86, 0, 50)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "MORE SOON"
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextSize = 19.000
+
+TextLabel_2.Parent = Main
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.Position = UDim2.new(0.676470578, 0, 0.388392866, 0)
+TextLabel_2.Size = UDim2.new(0, 86, 0, 50)
+TextLabel_2.Font = Enum.Font.SourceSans
+TextLabel_2.Text = "NO FOV YET"
+TextLabel_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.TextSize = 19.000
+
+-- Scripts:
+
+local function IDXJ_fake_script() -- toggle.LocalScript 
+	local script = Instance.new('LocalScript', toggle)
+
+	local players = game:GetService("Players")
+	local plr = players.LocalPlayer
+	local mouse = plr:GetMouse()
+	local camera = game.Workspace.CurrentCamera
+	local teamcheck = true
+	
+	local function ClosestPlayerToMouse()
+		local target = nil
+		local dist = math.huge
+		for i,v in pairs(players:GetPlayers()) do
+			if v.Name ~= plr.Name then
+				if v.Character and v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid.Health ~= 0 and v.Character:FindFirstChild("HumanoidRootPart") and teamcheck and v.TeamColor ~= plr.TeamColor then
+					local screenpoint = camera:WorldToScreenPoint(v.Character.HumanoidRootPart.Position)
+					local check = (Vector2.new(mouse.X,mouse.Y)-Vector2.new(screenpoint.X,screenpoint.Y)).magnitude
+	
+					if check < dist then
+						target  = v
+						dist = check
+					end
+				end
+			end
+		end
+	
+		return target 
+	end
+	
+	local mt = getrawmetatable(game)
+	local namecall = mt.__namecall
+	setreadonly(mt,false)
+	
+	mt.__namecall = function(self,...)
+		local args = {...}
+		local method = getnamecallmethod()
+	
+		if tostring(self) == "HitPart" and method == "FireServer" then
+			args[1] = ClosestPlayerToMouse().Character.Head
+			args[2] = ClosestPlayerToMouse().Character.Head.Position
+			return self.FireServer(self, unpack(args))
+		end
+		return namecall(self,...)
+	end
+end
+coroutine.wrap(IDXJ_fake_script)()
